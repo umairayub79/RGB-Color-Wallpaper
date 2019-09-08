@@ -14,8 +14,8 @@
                 <item>
                     <shape android:shape="rectangle"
                         android:tint="#ff0000">
-                        <corners android:radius="8dp"/>
-                        <size android:height="10dp" />
+                        <corners android:radius="5dp"/>
+                        <size android:height="6dp" />
                         <solid android:color="#ff0000" />
                     </shape>
                 </item>
