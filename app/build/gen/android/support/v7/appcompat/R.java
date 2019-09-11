@@ -2297,12 +2297,13 @@ containing a value of this type.
         public static final int button=0x7f020053;
         public static final int design_fab_background=0x7f020054;
         public static final int design_snackbar_background=0x7f020055;
-        public static final int green_seekbar=0x7f020056;
-        public static final int ic_launcher=0x7f020057;
-        public static final int notification_template_icon_bg=0x7f02005b;
-        public static final int plus=0x7f020058;
-        public static final int red_seekbar=0x7f020059;
-        public static final int wallpaper=0x7f02005a;
+        public static final int dices=0x7f020056;
+        public static final int green_seekbar=0x7f020057;
+        public static final int ic_launcher=0x7f020058;
+        public static final int notification_template_icon_bg=0x7f02005c;
+        public static final int plus=0x7f020059;
+        public static final int red_seekbar=0x7f02005a;
+        public static final int wallpaper=0x7f02005b;
     }
     public static final class id {
         public static final int action0=0x7f07008a;
@@ -2370,6 +2371,7 @@ containing a value of this type.
         public static final int exitUntilCollapsed=0x7f070025;
         public static final int expand_activities_button=0x7f07003e;
         public static final int expanded_menu=0x7f070051;
+        public static final int fab=0x7f07009e;
         public static final int fill=0x7f070035;
         public static final int fill_horizontal=0x7f070036;
         public static final int fill_vertical=0x7f07002e;
@@ -2386,12 +2388,11 @@ containing a value of this type.
         public static final int line3=0x7f070093;
         public static final int listMode=0x7f07000b;
         public static final int list_item=0x7f070041;
-        public static final int mainButtonRandom=0x7f07009c;
-        public static final int mainButtonWall=0x7f07009d;
-        public static final int mainSeekBarB=0x7f07009b;
-        public static final int mainSeekBarG=0x7f07009a;
-        public static final int mainSeekBarR=0x7f070099;
-        public static final int mainTextViewCode=0x7f070098;
+        public static final int mainButtonRandom=0x7f07009d;
+        public static final int mainSeekBarB=0x7f07009c;
+        public static final int mainSeekBarG=0x7f07009b;
+        public static final int mainSeekBarR=0x7f07009a;
+        public static final int mainTextViewCode=0x7f070099;
         public static final int main_content=0x7f070069;
         public static final int media_actions=0x7f07008d;
         public static final int middle=0x7f07001d;
@@ -2405,6 +2406,7 @@ containing a value of this type.
         public static final int parentPanel=0x7f070046;
         public static final int pin=0x7f070029;
         public static final int preview=0x7f070084;
+        public static final int previewV=0x7f070098;
         public static final int progress_circular=0x7f070006;
         public static final int progress_horizontal=0x7f070007;
         public static final int radio=0x7f070054;
@@ -2556,7 +2558,6 @@ containing a value of this type.
         public static final int appbar_scrolling_view_behavior=0x7f080014;
         public static final int bottom_sheet_behavior=0x7f080015;
         public static final int character_counter_pattern=0x7f080016;
-        public static final int hello_world=0x7f080018;
         public static final int status_bar_notification_info_overflow=0x7f080013;
     }
     public static final class style {

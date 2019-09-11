@@ -54,4 +54,13 @@ public class MainActivity extends AppCompatActivity {
         viewPager.setAdapter(adapter);
     }
 
+	@Override
+	public void onBackPressed()
+	{
+		// TODO: Implement this method
+		super.onBackPressed();
+		finish();
+	}
+
+	
 }

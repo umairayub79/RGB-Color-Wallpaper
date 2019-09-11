@@ -9,6 +9,8 @@ import android.view.*;
 import android.view.View.*;
 import android.widget.*;
 import codes.umair.rgbwallpaper.*;
+import android.support.design.widget.*;
+import java.io.*;
 
 /**
  * Created by Umair Ayub on 8/08/2019.
@@ -16,26 +18,24 @@ import codes.umair.rgbwallpaper.*;
 
 public class RGBWallaperFrag extends Fragment {
     
-	private Button buttonRandom;
     private SeekBar seekR;
     private SeekBar seekG;
     private SeekBar seekB;
 	private TextView textCode;
-	private LinearLayout root;
-	
-	
+	private FloatingActionButton fabRan,fabChng;
+	private ImageView previewV;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.rgb_frag,container,false);
-        buttonRandom = (Button) view.findViewById(R.id.mainButtonRandom);
-
+       // buttonRandom = (Button) view.findViewById(R.id.mainButtonRandom);
+		fabRan = (FloatingActionButton) view.findViewById(R.id.mainButtonRandom);
+		fabChng = (FloatingActionButton) view.findViewById(R.id.fab);
         seekR = (SeekBar) view.findViewById(R.id.mainSeekBarR);
         seekG = (SeekBar) view.findViewById(R.id.mainSeekBarG);
         seekB = (SeekBar) view.findViewById(R.id.mainSeekBarB);
-		root = (LinearLayout) view.findViewById(R.id.root);
         textCode = (TextView) view.findViewById(R.id.mainTextViewCode);
-        
+        previewV = (ImageView) view.findViewById(R.id.previewV);
 		GenerateRandom();
 
 		seekR.setOnSeekBarChangeListener(new displayRGB());
@@ -43,7 +43,7 @@ public class RGBWallaperFrag extends Fragment {
         seekB.setOnSeekBarChangeListener(new displayRGB());
 
 
-		buttonRandom.setOnClickListener(new OnClickListener(){
+		fabRan.setOnClickListener(new OnClickListener(){
 
 				@Override
 				public void onClick(View p1)
@@ -51,6 +51,23 @@ public class RGBWallaperFrag extends Fragment {
 					// TODO: Implement this method
 					GenerateRandom();
 
+				}
+
+
+			});
+		fabChng.setOnClickListener(new OnClickListener(){
+
+				@Override
+				public void onClick(View p1)
+				{
+					// TODO: Implement this method
+					try{
+						Util.setWallpaper(getActivity(),Color.rgb(seekR.getProgress(),seekG.getProgress(),seekB.getProgress()));
+						Snackbar.make(p1,"Wallpaper Changed Successfully!",Snackbar.LENGTH_LONG).show();
+					}catch (IOException e){
+						e.printStackTrace();
+					}
+					
 				}
 
 
@@ -68,7 +85,7 @@ public class RGBWallaperFrag extends Fragment {
 		seekG.setProgress(randomG);
 		seekB.setProgress(randomB);
 
-		root.setBackgroundColor(Color.rgb(randomR, randomG, randomB));
+		previewV.setBackgroundColor(Color.rgb(randomR, randomG, randomB));
 	}
 
 
@@ -87,7 +104,7 @@ public class RGBWallaperFrag extends Fragment {
         @Override
         public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
 
-            root.setBackgroundColor(Color.rgb(seekR.getProgress(), seekG.getProgress(), seekB.getProgress()));
+            previewV.setBackgroundColor(Color.rgb(seekR.getProgress(), seekG.getProgress(), seekB.getProgress()));
 
             String red = Integer.toHexString(seekR.getProgress());
             red = Util.zero(red);

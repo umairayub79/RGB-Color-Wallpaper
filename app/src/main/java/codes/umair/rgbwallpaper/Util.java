@@ -32,19 +32,7 @@ public class Util {
         wallpaperManager.setBitmap(bitmap);
     }
 	
-	public static void setBitmapAsWallpaper(WallpaperManager wallpaperManager, Context context,Bitmap bitmap) {
-        try {
-            wallpaperManager.setBitmap(bitmap);
-            FileOutputStream fileOutputStream = new FileOutputStream(new File(context.getFilesDir(), "lastwlp.png"));
-            bitmap.compress(Bitmap.CompressFormat.PNG, 100, (OutputStream)fileOutputStream);
-            
-            return;
-        }
-        catch (IOException iOException) {
-            iOException.printStackTrace();
-            return;
-        }
-    }
+	
 
     
     
