@@ -1,16 +1,22 @@
 package codes.umair.rgbwallpaper.Fragments;
 
 
+import android.*;
+import android.content.*;
 import android.graphics.*;
 import android.os.*;
 import android.support.annotation.*;
+import android.support.design.widget.*;
 import android.support.v4.app.*;
 import android.view.*;
 import android.view.View.*;
 import android.widget.*;
 import codes.umair.rgbwallpaper.*;
-import android.support.design.widget.*;
+import com.nabinbhandari.android.permissions.*;
 import java.io.*;
+import java.util.*;
+
+import codes.umair.rgbwallpaper.R;
 
 /**
  * Created by Umair Ayub on 8/08/2019.
@@ -22,7 +28,7 @@ public class RGBWallaperFrag extends Fragment {
     private SeekBar seekG;
     private SeekBar seekB;
 	private TextView textCode;
-	private FloatingActionButton fabRan,fabChng;
+	private FloatingActionButton fabRan,fabChng,fabSave;
 	private ImageView previewV;
     @Nullable
     @Override
@@ -31,6 +37,7 @@ public class RGBWallaperFrag extends Fragment {
        // buttonRandom = (Button) view.findViewById(R.id.mainButtonRandom);
 		fabRan = (FloatingActionButton) view.findViewById(R.id.mainButtonRandom);
 		fabChng = (FloatingActionButton) view.findViewById(R.id.fab);
+		fabSave = (FloatingActionButton) view.findViewById(R.id.fabsave);
         seekR = (SeekBar) view.findViewById(R.id.mainSeekBarR);
         seekG = (SeekBar) view.findViewById(R.id.mainSeekBarG);
         seekB = (SeekBar) view.findViewById(R.id.mainSeekBarB);
@@ -43,6 +50,38 @@ public class RGBWallaperFrag extends Fragment {
         seekB.setOnSeekBarChangeListener(new displayRGB());
 
 
+		fabSave.setOnClickListener(new OnClickListener(){
+
+				@Override
+				public void onClick(final View p1)
+				{
+					// TODO: Implement this method
+					
+					final Bitmap bitmap = Util.createColorBitmap(getActivity(),Color.rgb(seekR.getProgress(),seekG.getProgress(),seekB.getProgress()));
+					String rationale = "Please provide Storage permission to save Wallpapers.";
+					String[] permissions = {Manifest.permission.WRITE_EXTERNAL_STORAGE};
+					
+					Permissions.Options options = new Permissions.Options()
+						.setRationaleDialogTitle("Info")
+						.setSettingsDialogTitle("Warning");
+
+					Permissions.check(getActivity(), permissions, rationale, options, new PermissionHandler() {
+							@Override
+							public void onGranted() {
+								// do your task.
+								Util.SaveBitmap(p1,bitmap);
+							}
+
+							@Override
+							public void onDenied(Context context, ArrayList<String> deniedPermissions) {
+								// permission denied, block the feature.
+							}
+						});
+					
+				}
+
+
+			});
 		fabRan.setOnClickListener(new OnClickListener(){
 
 				@Override
@@ -50,10 +89,7 @@ public class RGBWallaperFrag extends Fragment {
 				{
 					// TODO: Implement this method
 					GenerateRandom();
-
 				}
-
-
 			});
 		fabChng.setOnClickListener(new OnClickListener(){
 
@@ -62,10 +98,11 @@ public class RGBWallaperFrag extends Fragment {
 				{
 					// TODO: Implement this method
 					try{
-						Util.setWallpaper(getActivity(),Color.rgb(seekR.getProgress(),seekG.getProgress(),seekB.getProgress()));
+						Util.setWallpaper(getActivity(),Util.createColorBitmap(getActivity(),Color.rgb(seekR.getProgress(),seekG.getProgress(),seekB.getProgress())));
 						Snackbar.make(p1,"Wallpaper Changed Successfully!",Snackbar.LENGTH_LONG).show();
 					}catch (IOException e){
 						e.printStackTrace();
+						Snackbar.make(p1,"Unknown Error Occurred while changing wallpaper!",Snackbar.LENGTH_LONG).show();
 					}
 					
 				}

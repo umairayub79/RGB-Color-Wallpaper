@@ -1,9 +1,9 @@
 package codes.umair.rgbwallpaper.Fragments;
   
+import android.*;
 import android.app.*;
 import android.content.*;
 import android.graphics.*;
-import android.graphics.drawable.*;
 import android.os.*;
 import android.support.annotation.*;
 import android.support.design.widget.*;
@@ -13,6 +13,7 @@ import android.view.*;
 import android.view.View.*;
 import android.widget.*;
 import codes.umair.rgbwallpaper.*;
+import com.nabinbhandari.android.permissions.*;
 import java.io.*;
 import java.util.*;
 import yuku.ambilwarna.*;
@@ -28,8 +29,9 @@ public class GradientWallpaperFrag extends Fragment {
     
 	View v1,v2,v3;
 	ImageView previewV;
-	FloatingActionButton btnRandom;
-	FloatingActionButton btnWall;
+	FloatingActionButton fabRandom;
+	FloatingActionButton fabWall;
+	FloatingActionButton fabSave;
 	ArrayList<String>Colors = new ArrayList<>();
 	int mDefaultColor;
 	Bitmap bitmap;
@@ -38,12 +40,13 @@ public class GradientWallpaperFrag extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.gradient_frag,container,false);
         
-		btnRandom = (FloatingActionButton) view.findViewById(R.id.random);
-		btnWall = (FloatingActionButton) view.findViewById(R.id.change);
+		fabRandom = (FloatingActionButton) view.findViewById(R.id.random);
+		fabSave = (FloatingActionButton) view.findViewById(R.id.save);
+		fabWall = (FloatingActionButton) view.findViewById(R.id.change);
 		v1 = (View) view.findViewById(R.id.v1);
 		v2 = (View) view.findViewById(R.id.v2);
 		v3 = (View) view.findViewById(R.id.v3);
-		previewV =(ImageView) view.findViewById(R.id.preview);
+		previewV = (ImageView) view.findViewById(R.id.preview);
 			
 		
 		mDefaultColor = ContextCompat.getColor(getActivity(), R.color.colorPrimary);
@@ -105,7 +108,7 @@ public class GradientWallpaperFrag extends Fragment {
 				}
 			});
 			
-		btnRandom.setOnClickListener(new OnClickListener(){
+		fabRandom.setOnClickListener(new OnClickListener(){
 
 				@Override
 				public void onClick(View p1)
@@ -117,7 +120,37 @@ public class GradientWallpaperFrag extends Fragment {
 
 			
 		});
-		btnWall.setOnClickListener(new OnClickListener(){
+		fabSave.setOnClickListener(new OnClickListener(){
+
+				@Override
+				public void onClick(final View p1)
+				{
+					// TODO: Implement this method
+					//GenerateRandom();
+					String rationale = "Please provide Storage permission to save Wallpapers.";
+					String[] permissions = {Manifest.permission.WRITE_EXTERNAL_STORAGE};
+
+					Permissions.Options options = new Permissions.Options()
+						.setRationaleDialogTitle("Info")
+						.setSettingsDialogTitle("Warning");
+
+					Permissions.check(getActivity(), permissions, rationale, options, new PermissionHandler() {
+							@Override
+							public void onGranted() {
+								// do your task.
+								Util.SaveBitmap(p1,bitmap);
+							}
+
+							@Override
+							public void onDenied(Context context, ArrayList<String> deniedPermissions) {
+								// permission denied, block the feature.
+							}
+						});
+				}
+
+
+			});
+		fabWall.setOnClickListener(new OnClickListener(){
 
 				@Override
 				public void onClick(View p1)

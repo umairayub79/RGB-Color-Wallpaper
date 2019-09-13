@@ -73,6 +73,16 @@
 					app:elevation="6dp"
 					android:tint="#ffffff"
 					android:layout_margin="5dp"/>
+				
+				<android.support.design.widget.FloatingActionButton
+					android:id="@+id/fabsave"
+					android:layout_width="60dp"
+					android:layout_height="60dp"
+					android:src="@drawable/save"
+					android:layout_gravity="bottom|center"
+					app:elevation="6dp"
+					android:tint="#ffffff"
+					android:layout_margin="5dp"/>
 
 			</LinearLayout>
 
