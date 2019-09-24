@@ -1,12 +1,15 @@
 package codes.umair.rgbwallpaper;
 
-import android.os.*;
-import android.support.design.widget.*;
-import android.support.v4.view.*;
-import android.support.v7.app.*;
-import android.support.v7.widget.*;
-import codes.umair.rgbwallpaper.Fragments.*;
-import codes.umair.rgbwallpaper.*;
+import android.os.Bundle;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.viewpager.widget.ViewPager;
+
+import com.google.android.material.tabs.TabLayout;
+
+import codes.umair.rgbwallpaper.Fragments.GradientWallpaperFrag;
+import codes.umair.rgbwallpaper.Fragments.RGBWallaperFrag;
 public class MainActivity extends AppCompatActivity {
 
     
@@ -18,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        _toolbar = (Toolbar) findViewById(R.id.toolbar);
+        _toolbar = findViewById(R.id.toolbar);
 		setSupportActionBar(_toolbar);
 		
 		
@@ -26,10 +29,10 @@ public class MainActivity extends AppCompatActivity {
         mSectionsPageAdapter = new SectionsPageAdapter(getSupportFragmentManager());
 
         // Set up the ViewPager with the sections adapter.
-        mViewPager = (ViewPager) findViewById(R.id.container);
+        mViewPager = findViewById(R.id.container);
         setupViewPager(mViewPager);
 
-        TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
+        TabLayout tabLayout = findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(mViewPager);
     }
 

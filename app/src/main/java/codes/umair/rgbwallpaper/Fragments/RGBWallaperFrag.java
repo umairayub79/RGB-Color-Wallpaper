@@ -1,22 +1,32 @@
 package codes.umair.rgbwallpaper.Fragments;
 
 
-import android.*;
-import android.content.*;
-import android.graphics.*;
-import android.os.*;
-import android.support.annotation.*;
-import android.support.design.widget.*;
-import android.support.v4.app.*;
-import android.view.*;
-import android.view.View.*;
-import android.widget.*;
-import codes.umair.rgbwallpaper.*;
-import com.nabinbhandari.android.permissions.*;
-import java.io.*;
-import java.util.*;
+import android.Manifest;
+import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.Color;
+import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.SeekBar;
+import android.widget.TextView;
+
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.Snackbar;
+import com.nabinbhandari.android.permissions.PermissionHandler;
+import com.nabinbhandari.android.permissions.Permissions;
+
+import java.io.IOException;
+import java.util.ArrayList;
 
 import codes.umair.rgbwallpaper.R;
+import codes.umair.rgbwallpaper.Util;
 
 /**
  * Created by Umair Ayub on 8/08/2019.
@@ -35,14 +45,14 @@ public class RGBWallaperFrag extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.rgb_frag,container,false);
        // buttonRandom = (Button) view.findViewById(R.id.mainButtonRandom);
-		fabRan = (FloatingActionButton) view.findViewById(R.id.mainButtonRandom);
-		fabChng = (FloatingActionButton) view.findViewById(R.id.fab);
-		fabSave = (FloatingActionButton) view.findViewById(R.id.fabsave);
-        seekR = (SeekBar) view.findViewById(R.id.mainSeekBarR);
-        seekG = (SeekBar) view.findViewById(R.id.mainSeekBarG);
-        seekB = (SeekBar) view.findViewById(R.id.mainSeekBarB);
-        textCode = (TextView) view.findViewById(R.id.mainTextViewCode);
-        previewV = (ImageView) view.findViewById(R.id.previewV);
+		fabRan = view.findViewById(R.id.mainButtonRandom);
+		fabChng = view.findViewById(R.id.fab);
+		fabSave = view.findViewById(R.id.fabsave);
+		seekR = view.findViewById(R.id.mainSeekBarR);
+		seekG = view.findViewById(R.id.mainSeekBarG);
+		seekB = view.findViewById(R.id.mainSeekBarB);
+		textCode = view.findViewById(R.id.mainTextViewCode);
+		previewV = view.findViewById(R.id.previewV);
 		GenerateRandom();
 
 		seekR.setOnSeekBarChangeListener(new displayRGB());
@@ -102,7 +112,7 @@ public class RGBWallaperFrag extends Fragment {
 						Snackbar.make(p1,"Wallpaper Changed Successfully!",Snackbar.LENGTH_LONG).show();
 					}catch (IOException e){
 						e.printStackTrace();
-						Snackbar.make(p1,"Unknown Error Occurred while changing wallpaper!",Snackbar.LENGTH_LONG).show();
+						Snackbar.make(p1, "Unknown Error Occurred while changing wallpaper!", Snackbar.LENGTH_LONG).show();
 					}
 					
 				}

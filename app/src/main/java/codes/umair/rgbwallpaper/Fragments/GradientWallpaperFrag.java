@@ -1,25 +1,42 @@
 package codes.umair.rgbwallpaper.Fragments;
-  
-import android.*;
-import android.app.*;
-import android.content.*;
-import android.graphics.*;
-import android.os.*;
-import android.support.annotation.*;
-import android.support.design.widget.*;
-import android.support.v4.app.*;
-import android.support.v4.content.*;
-import android.view.*;
-import android.view.View.*;
-import android.widget.*;
-import codes.umair.rgbwallpaper.*;
-import com.nabinbhandari.android.permissions.*;
-import java.io.*;
-import java.util.*;
-import yuku.ambilwarna.*;
 
-import android.support.v4.app.Fragment;
+import android.Manifest;
+import android.app.ProgressDialog;
+import android.app.WallpaperManager;
+import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.LinearGradient;
+import android.graphics.Paint;
+import android.graphics.Shader;
+import android.os.AsyncTask;
+import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.view.View.OnLongClickListener;
+import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.Toast;
+
+import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
+import androidx.fragment.app.Fragment;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.nabinbhandari.android.permissions.PermissionHandler;
+import com.nabinbhandari.android.permissions.Permissions;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Random;
+
 import codes.umair.rgbwallpaper.R;
+import codes.umair.rgbwallpaper.Util;
+import yuku.ambilwarna.AmbilWarnaDialog;
 
 /**
  * Created by Umair Ayub on 8/08/2019.
@@ -39,14 +56,14 @@ public class GradientWallpaperFrag extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.gradient_frag,container,false);
-        
-		fabRandom = (FloatingActionButton) view.findViewById(R.id.random);
-		fabSave = (FloatingActionButton) view.findViewById(R.id.save);
-		fabWall = (FloatingActionButton) view.findViewById(R.id.change);
-		v1 = (View) view.findViewById(R.id.v1);
-		v2 = (View) view.findViewById(R.id.v2);
-		v3 = (View) view.findViewById(R.id.v3);
-		previewV = (ImageView) view.findViewById(R.id.preview);
+
+		fabRandom = view.findViewById(R.id.random);
+		fabSave = view.findViewById(R.id.save);
+		fabWall = view.findViewById(R.id.change);
+		v1 = view.findViewById(R.id.v1);
+		v2 = view.findViewById(R.id.v2);
+		v3 = view.findViewById(R.id.v3);
+		previewV = view.findViewById(R.id.preview);
 			
 		
 		mDefaultColor = ContextCompat.getColor(getActivity(), R.color.colorPrimary);
@@ -96,7 +113,7 @@ public class GradientWallpaperFrag extends Fragment {
 				{
 					if(Colors.size() == 3){
 							Colors.remove(2);
-							;GenerateGradientWallpaper(Colors);
+						GenerateGradientWallpaper(Colors);
 							v3.setBackgroundResource(R.drawable.plus);
 						}else{
 							if(Colors.size() > 1){
@@ -229,7 +246,7 @@ public class GradientWallpaperFrag extends Fragment {
 								v2.setBackgroundColor(Color.parseColor(colorCode2));
 							if(Colors.size() == 1){
 								Colors.add(colorCode2);
-								;GenerateGradientWallpaper(Colors);
+								GenerateGradientWallpaper(Colors);
 							}else{
 							if(Colors.size() > 1){
 								Colors.set(1,colorCode2);
@@ -269,17 +286,17 @@ public class GradientWallpaperFrag extends Fragment {
     }
 	protected void GenerateGradientWallpaper(ArrayList<String> arrayList) {
         int n;
-        WallpaperManager wallpaperManager = WallpaperManager.getInstance((Context)this.getActivity());
+		WallpaperManager wallpaperManager = WallpaperManager.getInstance(this.getActivity());
         int n2 = wallpaperManager.getDesiredMinimumHeight();
-        Bitmap wallpaper = Bitmap.createBitmap((int)n2, (int)n2, (Bitmap.Config)Bitmap.Config.ARGB_8888);
+		Bitmap wallpaper = Bitmap.createBitmap(n2, n2, Bitmap.Config.ARGB_8888);
         int[] arrn = new int[arrayList.size()];
         for (int i = 0; i < (n = arrayList.size()); ++i) {
-            arrn[i] = Color.parseColor((String)((String)arrayList.get(i)));
+			arrn[i] = Color.parseColor(arrayList.get(i));
         }
         Paint paint = new Paint();
         LinearGradient linearGradient = new LinearGradient(0.0f, 0.0f, (float)n2, (float)n2, arrn, null, Shader.TileMode.CLAMP);
         Canvas canvas = new Canvas(wallpaper);
-        paint.setShader((Shader)linearGradient);
+		paint.setShader(linearGradient);
         canvas.drawRect(0.0f, 0.0f, (float)n2, (float)n2, paint);
 		previewV.setImageBitmap(wallpaper);
 		bitmap = wallpaper;
@@ -301,7 +318,7 @@ public class GradientWallpaperFrag extends Fragment {
 				WallpaperManager wallpaperManager = WallpaperManager.getInstance(getActivity());
 				wallpaperManager.setBitmap(p1[0]);
 				FileOutputStream fileOutputStream = new FileOutputStream(new File(getActivity().getFilesDir(), "lastwlp.png"));
-				p1[0].compress(Bitmap.CompressFormat.PNG, 100, (OutputStream)fileOutputStream);
+				p1[0].compress(Bitmap.CompressFormat.PNG, 100, fileOutputStream);
 				
 				return null;
 			}

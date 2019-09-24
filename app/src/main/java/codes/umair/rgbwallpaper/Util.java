@@ -1,14 +1,20 @@
 package codes.umair.rgbwallpaper;
 
-import android.app.*;
-import android.content.*;
-import android.graphics.*;
-import android.os.*;
-import android.support.design.widget.*;
-import android.view.*;
-import java.io.*;
-import java.text.*;
-import java.util.*;
+import android.app.Activity;
+import android.app.WallpaperManager;
+import android.content.Context;
+import android.graphics.Bitmap;
+import android.os.Build;
+import android.os.Environment;
+import android.view.View;
+
+import com.google.android.material.snackbar.Snackbar;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class Util {
 
@@ -26,7 +32,7 @@ public class Util {
 		
         WallpaperManager wallpaperManager = WallpaperManager.getInstance((activity.getApplicationContext()));
         int n2 = wallpaperManager.getDesiredMinimumHeight();
-        Bitmap bitmap = Bitmap.createBitmap((int)n2, (int)n2, (Bitmap.Config)Bitmap.Config.ARGB_8888);
+        Bitmap bitmap = Bitmap.createBitmap(n2, n2, Bitmap.Config.ARGB_8888);
        
         bitmap.eraseColor(n);
         return bitmap;
