@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
 
 android {
     compileSdkVersion 29
@@ -6,9 +7,9 @@ android {
     defaultConfig {
         applicationId "codes.umair.rgbwallpaper"
         minSdkVersion 19
-        targetSdkVersion 28
-        versionCode 2
-        versionName "1.1"
+        targetSdkVersion 29
+        versionCode 4
+        versionName "1.3"
     }
     buildTypes {
         release {
@@ -25,6 +26,13 @@ dependencies {
     implementation 'com.google.android.material:material:1.0.0'
     implementation 'com.nabinbhandari.android:permissions:3.8'
     implementation 'com.github.yukuku:ambilwarna:2.0.1'
+    implementation "androidx.core:core-ktx:+"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation 'com.github.umairayub79:MaDialog:1.5'
+    implementation 'com.github.florent37:shapeofview:1.4.7'
 
 
+}
+repositories {
+    mavenCentral()
 }

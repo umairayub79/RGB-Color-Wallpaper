@@ -1,87 +1,105 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	xmlns:app="http://schemas.android.com/apk/res-auto"
-	android:id="@+id/root"
-	android:layout_width="match_parent"
-	android:layout_height="match_parent"
-	android:gravity="center"
-	android:orientation="vertical">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
-			<ImageView
-				android:id="@+id/previewV"
-				android:layout_width="150dp"
-				android:layout_height="150dp"
-				android:layout_margin="15dp"/>
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="30dp"
+        app:cardCornerRadius="10dp"
+        app:cardElevation="10dp">
 
-			<TextView
-				android:textSize="20sp"
-				android:textAlignment="center"
-				android:layout_height="wrap_content"
-				android:textAppearance="?android:attr/textAppearanceSmall"
-				android:layout_width="match_parent"
-				android:text=""
-				android:id="@+id/mainTextViewCode"
-				android:gravity="center"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:paddingStart="20dp"
+            android:paddingTop="5dp"
+            android:paddingEnd="20dp"
+            android:paddingBottom="10dp">
 
-			<SeekBar
-				android:progressDrawable="@drawable/red_seekbar"
-				android:max="255"
-				android:layout_height="wrap_content"
-				android:layout_width="match_parent"
-				android:id="@+id/mainSeekBarR"
-				android:layout_margin="5dp"/>
+            <TextView
+                android:id="@+id/mainTextViewCode"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:padding="10dp"
+                android:textAlignment="center"
+                android:textAllCaps="true"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:textSize="20sp" />
 
-			<SeekBar
-				android:progressDrawable="@drawable/green_seekbar"
-				android:max="255"
-				android:layout_height="wrap_content"
-				android:layout_width="match_parent"
-				android:id="@+id/mainSeekBarG"
-				android:layout_margin="5dp"/>
+            <SeekBar
+                android:id="@+id/mainSeekBarR"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:max="255"
+                android:padding="5dp"
+                android:thumbTint="#ff0000" />
 
-			<SeekBar
-				android:progressDrawable="@drawable/blue_seekbar"
-				android:max="255"
-				android:layout_height="wrap_content"
-				android:layout_width="match_parent"
-				android:id="@+id/mainSeekBarB"
-				android:layout_margin="5dp"/>
+            <SeekBar
+                android:id="@+id/mainSeekBarG"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:max="255"
+                android:padding="5dp"
+                android:thumbTint="#00FF00" />
 
-			<LinearLayout
-				android:layout_height="wrap_content"
-				android:layout_width="wrap_content"
-				android:orientation="horizontal">
+            <SeekBar
+                android:id="@+id/mainSeekBarB"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:max="255"
+                android:padding="5dp"
+                android:thumbTint="#0000ff" />
 
-				<android.support.design.widget.FloatingActionButton
-					android:id="@+id/mainButtonRandom"
-					android:layout_width="60dp"
-					android:layout_height="60dp"
-					android:src="@drawable/dices"
-					android:tint="#ffffff"
-					android:layout_gravity="bottom|center"
-					app:elevation="6dp"
-					android:layout_margin="5dp"/>
+            <LinearLayout
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:paddingTop="5dp"
+                android:paddingBottom="12dp"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:orientation="horizontal">
 
-				<android.support.design.widget.FloatingActionButton
-					android:id="@+id/fab"
-					android:layout_width="60dp"
-					android:layout_height="60dp"
-					android:src="@drawable/wallpaper"
-					android:layout_gravity="bottom|center"
-					app:elevation="6dp"
-					android:tint="#ffffff"
-					android:layout_margin="5dp"/>
-				
-				<android.support.design.widget.FloatingActionButton
-					android:id="@+id/fabsave"
-					android:layout_width="60dp"
-					android:layout_height="60dp"
-					android:src="@drawable/save"
-					android:layout_gravity="bottom|center"
-					app:elevation="6dp"
-					android:tint="#ffffff"
-					android:layout_margin="5dp"/>
+                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                    android:id="@+id/mainButtonRandom"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_margin="10dp"
+                    android:layout_gravity="bottom|center"
+                    android:src="@drawable/ic_dices"
+                    app:fabCustomSize="50dp" />
 
-			</LinearLayout>
+                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                    android:id="@+id/fab"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_margin="10dp"
+                    android:layout_gravity="bottom|center"
+                    android:src="@drawable/ic_wallpaper"
+                    app:fabCustomSize="60dp" />
 
-		</LinearLayout>
+                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                    android:id="@+id/fabsave"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_margin="10dp"
+                    android:layout_gravity="bottom|center"
+                    android:src="@drawable/ic_save"
+                    app:fabCustomSize="50dp" />
+
+            </LinearLayout>
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+</RelativeLayout>
